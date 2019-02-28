@@ -33,19 +33,13 @@ spec:
 """
     }
   }
+  libraries {
+    lib('DaytraderLib')
+  }
   stages {
     stage('build maven') {
         steps {
-            container('maven') {
-                dir ('daytrader-quotesapp') {
-                    sh 'mvn package -B -e -Dmaven.test.skip=true'
-                    //sh 'pwd'
-                    //sh 'ls -R | grep target'
-                }
-                //sh 'pwd'
-                //sh 'ls -la'
-                //sh 'ls -la daytrader-quotesapp/daytrader-quotes/target'
-            }
+            mavenBuild('daytrader-quotesapp')
         }
     }
         stage('Build with Kaniko') {
