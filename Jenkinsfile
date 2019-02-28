@@ -1,41 +1,16 @@
+@Library('DayTraderLib')_
+def podTemplateYaml = libraryResource 'maven-kaniko.yaml'
+
 pipeline {
   agent {
     kubernetes {
-      //cloud 'kubernetes'
-      label 'mypod'
-      yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: maven
-    image: maven:3.6-jdk-8
-    command: ['cat']
-    tty: true
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    imagePullPolicy: Always
-    command:
-    - /busybox/cat
-    tty: true
-    volumeMounts:
-      - name: jenkins-docker-cfg
-        mountPath: /kaniko/.docker
-  volumes:
-  - name: jenkins-docker-cfg
-    projected:
-      sources:
-      - secret:
-          name: devrepo-secret
-          items:
-            - key: .dockerconfigjson
-              path: config.json
-"""
+      label 'maven-kaniko-pod'
+      yaml podTemplateYaml
     }
   }
-  libraries {
-    lib('DaytraderLib')
-  }
+  //libraries {
+  //  lib('DaytraderLib')
+  //}
   stages {
     stage('build maven') {
         steps {
