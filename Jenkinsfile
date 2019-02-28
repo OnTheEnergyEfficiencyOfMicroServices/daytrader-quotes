@@ -1,4 +1,4 @@
-@Library('DayTraderLib')_
+@Library('DaytraderLib')_
 def podTemplateYaml = libraryResource 'maven-kaniko.yaml'
 
 pipeline {
