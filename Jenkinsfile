@@ -42,22 +42,16 @@ spec:
             mavenBuild('daytrader-quotesapp')
         }
     }
-        stage('Build with Kaniko') {
+    stage('Build with Kaniko') {
       environment {
         PATH = "/busybox:/kaniko:$PATH"
       }
       steps {
-        container(name: 'kaniko', shell: '/busybox/sh') {
-            sh '''#!/busybox/sh
-            /kaniko/executor -v debug -f `pwd`/daytrader-quotesapp/daytrader-quotes/Dockerfile -c `pwd`/daytrader-quotesapp/daytrader-quotes --insecure --skip-tls-verify --destination=baserepodev.devrepo.malibu-pctn.com/104017-malibu-artifacts/daytrader-example-quotesapp:latest \
-            --build-arg WAR_ARTIFACTID=daytrader-quotes \
-            --build-arg APP_VERSION=4.0.0 \
-            --build-arg APP_ARTIFACTID=daytrader-quotesapp \
-            --build-arg EXPOSE_PORT=4443 \
-            --build-arg DATABASE_DRIVER=org.apache.derby.jdbc.EmbeddedDriver \
-            --build-arg DATABASE_URL="jdbc:derby:tradesdb;create=true"
-            '''
-            
+        params = '''
+          --build-arg DATABASE_DRIVER=org.apache.derby.jdbc.EmbeddedDriver \
+          --build-arg DATABASE_URL="jdbc:derby:tradesdb;create=true"
+          '''
+        kanikoBuild('kaniko', 'daytrader-quotesapp', 'daytrader-quotes', 'baserepodev.devrepo.malibu-pctn.com/104017-malibu-artifacts', 'daytrader-example-quotesapp', 'latest', 4.0.0, 4443, params)
         }
       }
     }
