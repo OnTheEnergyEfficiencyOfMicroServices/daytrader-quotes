@@ -1,7 +1,7 @@
 ##
 ##  Use lightweight alpine linux base image for microservices; instead of debian
 ##
-FROM baserepodev.devrepo.malibu-pctn.com/104017-malibu-artifacts/openjdk:8-jre 
+FROM baserepodev.devrepo.malibu-pctn.com/104017-malibu-artifacts/infra-base-images/openjdk:8-jre 
 ##
 ##  Sets the author field of the generated image
 ##
