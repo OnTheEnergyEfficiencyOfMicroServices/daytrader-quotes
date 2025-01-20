@@ -21,8 +21,8 @@ echo "DAYTRADER_TRUSTSTORE_FILENAME=$DAYTRADER_TRUSTSTORE_PASSWORD"
 # set app name
 #
 export DAYTRADER_APP_VERSION=4.0.0
-export DAYTRADER_APP_ARTIFACTID=daytrader-portfoliosapp
-export DAYTRADER_WAR_ARTIFACTID=daytrader-portfolios
+export DAYTRADER_APP_ARTIFACTID=daytrader-quotesapp
+export DAYTRADER_WAR_ARTIFACTID=daytrader-quotes
 #
 # set db variables 
 #
@@ -33,8 +33,8 @@ export DAYTRADER_DATABASE_PASSWORD=
 #
 # set tomcat variables
 #
-export SERVER_PORT=3443
-export SERVER_PORT_HTTPS=3443
+export SERVER_PORT=4443
+export SERVER_PORT_HTTPS=4443
 #
 # set service routes
 #
